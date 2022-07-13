@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            
+            <div class="media-body">
+                <article class="media content-section2"><br>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"> 
+                                <img class="rounded-circle account-img" src="{{ image_file }}">
+                            </div>
+                            <div class="col">
+                                <p class="text-secondary">{{ current_user.email }}</p>
+                                <h2 class="account-heading">{{ user_info_view.name }}</h2>
+                                <p class="text-secondary">{{ user_info_view.surname }}</p>
+                                
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </article>
+
+                
+                <div class="media-body">
+                    <div class="month">
+                        <ul>
+                          <li>{{mount}}<br><span style="font-size:18px">{{year}}</span></li>
+                        </ul>
+                    </div>
+                    <ul class="days">  
+                        {% for i in range(1,days+1) %}
+                        <li> 
+                            {% for day_of_absence in day_of_absences %}
+                                {% if day_of_absence == i %}
+                                    <span class="active" style="font-size:18px"> 
+                                {% endif %}
+                            {% endfor %}   
+                            {{i}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+                </div>
+            </div>    
+        </div>
+    </div>
+{% endblock content %}

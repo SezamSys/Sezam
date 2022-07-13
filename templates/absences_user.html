@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            
+            <div class="media-body">
+                <article class="media content-section2"><br>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"> 
+                                <img class="rounded-circle account-img" src="{{ image_file }}">
+                            </div>
+                            <div class="col">
+                                <p class="text-secondary">{{ current_user.email }}</p>
+                                <h2 class="account-heading">{{ user_info_view.name }}</h2>
+                                <p class="text-secondary">{{ user_info_view.surname }}</p>
+                                
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </article>
+                
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <p class="text-secondary">Send absences</p>
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>Absence type</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <td><select name="absence_item" class="form-control form-control-lg">
+                                {% for absence_limit in absence_limits %}
+                                <option ="{{ absence_limit.name }}" >{{ absence_limit.name }}</option>
+                                {% endfor %}
+                                </select> <br></td> 
+                              <td><input type="date" name="start_date" class="form-control form-control-lg"></td> 
+                              <td><input type="date" name="end_date" class="form-control form-control-lg"></td>
+                        </tbody>
+                        </table>
+                    <div class="form-group"></div>
+                    <input type="submit" name="btn" value="Post"  class="btn btn-outline-info"><br><br>
+                </form>
+            
+        <br><p class="text-secondary">My absences limits</p>
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead class="thead-light">
+            <tr>
+                <th>Id</td>
+                <th>Name</td>
+                <th>Amount</td>
+                <th>Start date</td>  
+                <th>End date</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for absence_limit in absence_limits %}
+              <tr>
+                  <td>{{ absence_limit.id }}</td> 
+                  <td>{{ absence_limit.name }}</td>
+                  <td>{{ absence_limit.amount }}</td>
+                  <td>{{ absence_limit.start_date }}</td>
+                  <td>{{ absence_limit.end_date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+            
+              
+        <br><p class="text-secondary">My absences</p>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Absence type</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Status</th>
+                        <th>Supervisior</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user_absence in user_absences %}
+                      <tr>
+                          <td>{{ user_absence.name }}</td> 
+                          <td>{{ user_absence.start_date }}</td> 
+                          <td>{{ user_absence.end_date }}</td>
+                          <td>{{ user_absence.status }}</td>
+                          <td>{{ user_absence.supervisor }}</td>
+                          
+                      {% endfor %}
+                    </tbody>
+                    </table>
+               
+                    
+                      <style>
+                          table{
+                              width:100%;
+                          }
+                          #example_filter{
+                              float:right;
+                          }
+                          #example_paginate{
+                              float:right;
+                          }
+                          label {
+                              display: inline-flex;
+                              margin-bottom: .5rem;
+                              margin-top: .5rem;
+                          }
+                          .page-item.disabled .page-link {
+                              color: #6c757d;
+                              pointer-events: none;
+                              cursor: auto;
+                              background-color: #fff;
+                              border-color: #dee2e6;
+                          }
+                        </style>
+    </div>
+    
+    <div class="border-top pt-3">
+
+    </div>
+</div>
+</div>
+{% endblock content %}

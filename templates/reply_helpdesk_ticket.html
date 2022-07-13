@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + ticket.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{{ url_for('user_helpdesk_tickets', username=ticket.author.username) }}">{{ ticket.author.username }}</a>
+        <small class="text-muted">{{ ticket.date_posted.strftime('%Y-%m-%d') }}</small>
+       
+      </div>
+      <p class="article-content"><b>{{ ticket.department }}</b></p>
+      <h2 class="article-title">{{ ticket.title }}</h2>
+      <p class="article-content">{{ ticket.content }}</p>
+      <small class="text-muted">{{ ticket.status }}</small>
+      <small class="text-muted">{{ ticket.id }}</small>
+
+
+      <div>
+      </div>
+    </div>
+  </article>
+{% for reply in replys %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + ticket.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        {{ reply.user }}
+        <small class="text-muted">{{ reply.date_posted.strftime('%Y-%m-%d') }}</small>
+        
+    </div>
+      <p class="article-content">{{ reply.content }}</p>
+      <div>
+      </div>
+    </div>
+  </article>
+{% endfor %}
+{% if ticket.status !='Done' %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            {% if current_user.privilege == 'Admin' %}
+
+            <div class="form-group">
+              {{ form.status.label(class="form-control-label") }}
+              {% if form.status.errors %}
+                  {{ form.status(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.status.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.status(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            {% endif %}
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+      </form>
+</div>
+{% endif %}
+{% endblock content %}

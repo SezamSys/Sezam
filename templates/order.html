@@ -1,0 +1,112 @@
+{% extends "layout2.html" %}
+{% block content %}
+<body>
+    <a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('orders') }}">Back</a>
+
+    <div class="content-section2">
+
+    <main role="main" class="container">
+
+    <fieldset class="form-group">
+    <article class="media content-section3"><br>
+        <div class="container">
+            <div class="row">
+                <h4 class="article-title"><small class="text-muted">Employee info </small> </h4><br>
+            </div>
+        </div>
+    </article>
+        <article class="media content-section2"><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col"> 
+                        <h4 class="article-title"><small class="text-muted">Type: </small><b></b></h4>
+                        <h4 class="article-title"><small class="text-muted">Manager: </small> </h4>
+                        <h4 class="article-title"><small class="text-muted">Date order: </small><small class="text-muted"><b></b></small></h4>
+                        <h4 class="article-title"><small class="text-muted">Department: </small> </h4>
+                    </div>   
+                    <div class="col">
+                        <h4 class="article-title"><small class="text-muted"></small><b>{{ order.typ }}</b></h4>
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order.supervisor}}</h4>
+                        <h4 class="article-title"><small class="text-muted"></small><small class="text-muted"><b>{{ order.date_posted.strftime('%Y-%m-%d') }}</b></small></h4>
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order.department }}</h4>
+                    </div>
+                    <div class="col">
+                        <h4 class="article-title"><small class="text-muted">Surname: </small> </h4>
+                        <h4 class="article-title"><small class="text-muted">Name: </small> </h4>
+                        <h4 class="article-title"><small class="text-muted">Start date: </small></h4>
+                        <h4 class="article-title"><small class="text-muted">End date: </small> </h4>
+                    </div>
+                    <div class="col">
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order.worker_surname }}</h4>
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order.worker_name }}</h4>
+                        <h4 class="article-title"><small class="text-muted"></small>{{ order.date_start }}</h4>
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order.date_end }}</h4>
+                    </div>
+                </div>
+            </div>
+        </article>   
+    </main>
+    
+    <article class="media content-section3"><br>
+        <div class="container">
+            <div class="row">
+                <h4 class="article-title"><small class="text-muted">It access </small> </h4><br>
+            </div>
+        </div>
+    </article>
+    
+
+    <article class="media content-section2"><br>
+        <div class="container">
+            <div class="row">
+                <div class="col">           
+                    <h4 class="article-title"><small class="text-muted">Privilege: </small> </h4><br>
+                    <h4 class="article-title"><small class="text-muted">Login: </small> </h4><br>
+                    <h4 class="article-title"><small class="text-muted">Email: </small> </h4><br>
+                    
+                    {% for order_item in order_items %}
+                        <h4 class="article-title"><small class="text-muted">{{order_item.name}} </small> </h4><br>
+                    {% endfor %}
+                    
+                
+                
+                </div>
+                   
+                <div class="col">
+                    <h4 class="article-title"><small class="text-muted"></small> {{ order.privilege }}</h4><br>
+                    <h4 class="article-title"><small class="text-muted"></small> {{ order.login }}</h4><br>
+                    <h4 class="article-title"><small class="text-muted"></small> {{ order.email }}</h4><br>
+                    {% for order_item in order_items %}
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order_item.value }}</h4><br>
+                    {% endfor %}
+                
+                </div>
+                <div class="col">
+                    <h4 class="article-title"><small class="text-muted"></small>.</h4><br>
+                    <h4 class="article-title"><small class="text-muted">Status: </small> </h4><br>
+                    <h4 class="article-title"><small class="text-muted">Status: </small> </h4><br>
+                    {% for order_item in order_items %}
+                        <h4 class="article-title"><small class="text-muted">Status: </small> </h4><br>
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    <h4 class="article-title"><small class="text-muted"></small>.</h4><br>
+                    <h4 class="article-title"><small class="text-muted"></small> {{ order.login_status }}</h4><br>
+                    <h4 class="article-title"><small class="text-muted"></small> {{ order.email_status }}</h4><br>
+                    {% for order_item in order_items %}
+                        <h4 class="article-title"><small class="text-muted"></small> {{ order_item.status }}</h4><br>
+                    {% endfor %}
+                </div>
+                
+                <div class="col"></div>
+                
+            </div>
+        </div>
+    </article> 
+     
+    </main>
+</fieldset>
+
+</body>  
+</div>
+{% endblock content %}

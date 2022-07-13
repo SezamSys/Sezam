@@ -1,0 +1,17 @@
+{% extends "layout2.html" %}
+{% block content %}
+    <h1>Management Page - Orders</h1><br><br>
+    <div class="container">
+      <div class="col-md-4"></div>
+      
+    
+    
+      {% if current_user.privilege =='Admin' %}
+          <br><a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('mgmt_order_add_item') }}">Add item</a>
+        {% endif %}
+    </div>
+    
+
+   
+          
+{% endblock content %}

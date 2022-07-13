@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.worker_name.label(class="form-control-label") }}
+                {% if form.worker_name.errors %}
+                    {{ form.worker_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.worker_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.worker_name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.worker_surname.label(class="form-control-label") }}
+                {% if form.worker_surname.errors %}
+                    {{ form.worker_surname(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.worker_surname.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.worker_surname(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>           
+            
+            
+            <div class="form-group">
+                {{ form.department.label(class="form-control-label") }}
+                {% if form.department.errors %}
+                    {{ form.department(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.department.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.department(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.date_start.label(class="form-control-label") }}
+                {% if form.date_start.errors %}
+                    {{ form.date_start(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.date_start.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.date_start(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.date_end.label(class="form-control-label") }}
+                {% if form.date_end.errors %}
+                    {{ form.date_end(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.date_end.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.date_end(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                
+                {% for order_item in order_items %}
+                <div class="form-control form-control-lg")>
+                    {{ order_item.name }}
+                
+                    <select name="order_item_{{order_item.id}}" class="form-control form-control-lg">
+                        <option ="-" selected>-</option>
+                        <option ="yes" >Yes</option>
+                    </select> <br>
+                    <div class="form-group"></div>
+                </div><br>
+                {% endfor %}
+                
+            </div>
+            
+
+
+            <div class="form-group">
+                {{ form.privilege.label(class="form-control-label") }}
+                {% if form.privilege.errors %}
+                    {{ form.privilege(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.privilege.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.privilege(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}

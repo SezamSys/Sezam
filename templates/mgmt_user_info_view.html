@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="http://127.0.0.1:5000/static/profile_pics/{{ user.image_file }}">
+        <div class="media-body">
+          
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+          {% if user_info %}    
+            <p class="text-secondary">Name: {{user_info.name}}  </p><br>
+            <p class="text-secondary">Surname: {{user_info.surname}}</p><br>
+            <p class="text-secondary">Department: {{user_info.department}}</p><br>
+            <p class="text-secondary">Street: {{user_info.street}}</p><br>
+            <p class="text-secondary">House number: {{user_info.house_number}}</p><br>
+            <p class="text-secondary">Post code: {{user_info.post_code}}</p><br>
+            <p class="text-secondary">City: {{user_info.city}}</p><br>
+          {% endif %}
+
+
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}

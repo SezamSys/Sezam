@@ -1,0 +1,180 @@
+{% extends "layout2.html" %}
+{% block content %}
+<div class="content-section2">
+    <br><a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('orders') }}">Back</a>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <article class="media content-section3"><br>
+                <div class="container">
+                    <div class="row">
+                        <h4 class="article-title"><small class="text-muted">Employee info </small> </h4><br>
+                    </div>
+                </div>
+            </article>
+            <main role="main" class="container">
+                <article class="media content-section2"><br>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"> 
+                                <h4 class="article-title"><small class="text-muted">Type: </small><b></b></h4>
+                                <h4 class="article-title"><small class="text-muted">Manager: </small> </h4>
+                                <h4 class="article-title"><small class="text-muted">Date order: </small><small class="text-muted"><b></b></small></h4>
+                                <h4 class="article-title"><small class="text-muted">Department: </small> </h4>
+                                <h4 class="article-title"><small class="text-muted"> </small> </h4>
+                                <h4 class="article-title"><small class="text-muted">Start date: </small> </h4>
+                                <h4 class="article-title"><small class="text-muted">End date: </small> </h4>
+
+
+                            </div>
+                            <div class="col">
+                                <h4 class="article-title"><small class="text-muted"></small><b>{{ order.typ }}</b></h4>
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.supervisor}}</h4>
+                                <h4 class="article-title"><small class="text-muted"></small><small class="text-muted"><b>{{ order.date_posted.strftime('%Y-%m-%d') }}</b></small></h4>
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.department }}</h4>
+                                <h4 class="article-title"><small class="text-muted"></small></h4>
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.date_start }}</h4>
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.date_end }}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>  
+            
+    <article class="media content-section3"><br>
+        <div class="container">
+            <div class="row">
+                <h4 class="article-title"><small class="text-muted">It access </small> </h4><br>
+            </div>
+        </div>
+    </article>
+    <div class="row">
+        <div class="col">
+            <div class="content-section mt-2">
+                <div class="row">
+                    <div class="col">
+                        {{ form.login.label(class="form-control-label") }}
+                        {% if form.login.errors %}
+                            {{ form.login(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.login.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.login(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {% if order.login_status != 'Done' %}
+                            {{ form.login_status.label(class="form-control-label") }}
+                            {% if form.login_status.errors %}
+                                {{ form.login_status(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                {% for error in form.login_status.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.login_status(class="form-control form-control-lg") }}
+                            {% endif %}
+                        {% else %}
+                            Status:<br>
+                            {% if order.login_status == 'Done' %}
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.login_status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/ok.jpg') }}" width="50" height="60"></h4>
+                            {% elif order.login_status == 'Canceled'  %}
+                            <h4 class="article-title"><small class="text-muted"></small> {{ order.login_status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/cancel.png') }}" width="50" height="60"></h4>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="content-section mt-2">
+                <div class="row">
+                    <div class="col">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {% if order.email_status != 'Done' %}
+                            {{ form.email_status.label(class="form-control-label") }}
+                            {% if form.email_status.errors %}
+                                {{ form.email_status(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                {% for error in form.email_status.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email_status(class="form-control form-control-lg") }}
+                            {% endif %}
+                        {% else %}
+                            Status:<br>
+                            {% if order.email_status == 'Done' %}
+                                <h4 class="article-title"><small class="text-muted"></small> {{ order.login_status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/ok.jpg') }}" width="50" height="60"></h4>
+                            {% elif order.email_status == 'Canceled'  %}
+                            <h4 class="article-title"><small class="text-muted"></small> {{ order.login_status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/cancel.png') }}" width="50" height="60"></h4>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% for order_item in order_items %}
+                {% if order_item.value ==  '-' %}
+                {% else %}
+                    <div class="content-section mt-2">
+                        <div class="row">
+                            <div class="col">
+                                <br><h4 class="content-section mt-2">{{ order_item.name }}  </h4>
+                                {% if order_item.value == 'to remove' %}
+                                    <h4 class="article-title"><small class="text-muted"></small> {{ order_item.value }}</h4>
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                {% if order_item.status == 'Done' %}
+                                Status:
+                                    <h4 class="article-title"><small class="text-muted"></small> {{ order_item.status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/ok.jpg') }}" width="50" height="60"></h4>
+                                {% elif order_item.status == 'Canceled'  %}
+                                Status:
+                                    <h4 class="article-title"><small class="text-muted"></small> {{ order_item.status }}<img class="rounded-circle article-img" src="{{ url_for('static', filename='pic/canceled.png') }}" width="50" height="60"></h4>    
+                                {% else %}
+                                    <br><select name="order_item_{{order_item.id}}" class="form-control form-control-lg">
+                                        <option ="in_progress" selected>In progress</option>
+                                        <option ="Done" >Done</option>
+                                        <option ="Canceled"> Canceled</option>
+                                    </select> <br>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                {% endfor %}           
+
+        </div>
+        </fieldset>
+        <div class="form-group">
+        {% if order.status =='Done' %}
+        {% else %}
+            
+            <input type="submit" name="btn" value="Post"  class="btn btn-outline-info">
+            <input type="submit" name="btn" value="Done all"  class="btn btn-outline-info">
+        {% endif %}
+        
+        </div>
+       
+    </form>
+</div>
+{% endblock content %}

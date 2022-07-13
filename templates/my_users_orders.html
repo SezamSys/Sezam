@@ -1,0 +1,80 @@
+{% extends "layout2.html" %}
+{% block content %}
+    <h1>Management Page - Orders</h1><br><br>
+    <div class="container">
+      <div class="row"></div>
+        <div class="col">
+          <a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('orders') }}">Back</a>
+        </div>
+        <div class="col">
+          <a class="btn btn-secondary btn-sm mt-1" href="{{ url_for('new_employee') }}">New Employee order</a>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    
+     
+            {% for order in orders.items %}    
+               {% if order.supervisor_id == current_user.id and order.typ == 'New Employee' %}
+                    <article class="media content-section2"><br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">     
+                                    <br>{{ order.worker_name }} {{ order.worker_surname }} <br>
+                                        {{ order.email }} <br>
+                                        {{ order.user_id}} <br>   
+                                </div>
+                                <div class="col">
+                                  {% if order.user_id != 'brak' %}
+                                    <a href="/edit_access_employee/{{order.user_id}}" class="btn btn-secondary btn-sm m-1">Edit access</a><br>
+                                    <a href="/order/{{order.id}}" class="btn btn-secondary btn-sm m-1">Close access</a>
+                                  {% endif %}
+                                  </div>
+                                <div class="col"></div>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+          
+        <ul class="pagination">
+          {% if orders.has_prev %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('orders', page=orders.prev_num) }}">Previous</a>
+          {% else %}
+           
+          {% endif %}
+           </li>
+        {% for page_num in orders.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+              {% if orders.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('orders', page=page_num) }}">{{ page_num }}</a>
+              {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('orders', page=page_num) }}">{{ page_num }}</a>
+              {% endif %}
+            {% else %}
+              ...
+            {% endif %}
+        {% endfor %}
+        {% if orders.has_next %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('orders', page=orders.next_num) }}">Next</a>
+        {% else %}
+           
+        {% endif %}
+           </li>          
+        </ul>
+
+          
+          <script>
+            function checkAll(bx) {
+              var cbs = document.getElementsByTagName('input');
+              for(var i=0; i < cbs.length; i++) {
+                if(cbs[i].type == 'checkbox') {
+                  cbs[i].checked = bx.checked;
+                }
+              }
+            }
+            
+            </script>
+          
+{% endblock content %}
